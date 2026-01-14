@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+
+@theme {
+  --color-paper-50: #FDFBF7;
+  --color-paper-100: #F5F2EB;
+  --color-paper-200: #EBE8E0;
+  --color-paper-300: #E6E4DD;
+  --color-paper-900: #1A1A1A;
+
+  --color-ink-50: #EAEAEA;
+  --color-ink-800: #2A2A2A;
+  --color-ink-900: #111111;
+  --color-ink-950: #0A0A0A;
+
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --shadow-paper: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+  --shadow-paper-hover: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+  --shadow-floating: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.01);
+}
+
+@layer base {
+  body {
+    @apply bg-paper-50 text-paper-900 antialiased selection:bg-paper-200 transition-colors duration-300;
+  }
+  :root.dark body {
+    @apply bg-ink-900 text-ink-50 selection:bg-neutral-800;
+  }
+  
+  /* Masonry Grid Utilities that Tailwind doesn't have by default */
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 1.5rem;
+  }
+  @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+  @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+  @media (min-width: 1280px) { .masonry-grid { column-count: 4; } }
+
+  .break-inside-avoid { break-inside: avoid; }
+}

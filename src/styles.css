@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+@import "tailwindcss";
+
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* Paper Design Tokens */
+  --color-paper-50: #FDFBF7;
+  --color-paper-100: #F5F2EB;
+  --color-paper-200: #EBE8E0;
+  --color-paper-300: #E6E4DD;
+  --color-paper-900: #1A1A1A;
+
+  --color-ink-50: #EAEAEA;
+  --color-ink-800: #2A2A2A;
+  --color-ink-900: #111111;
+  --color-ink-950: #0A0A0A;
+
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --shadow-paper: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+  --shadow-paper-hover: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+  --shadow-floating: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.01);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  
+  /* Map Shadcn semantic colors to Paper tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  
+  /* Light Mode (Paper) */
+  --background: var(--color-paper-50);
+  --foreground: var(--color-paper-900);
+  
+  --card: #FFFFFF;
+  --card-foreground: var(--color-paper-900);
+  
+  --popover: #FFFFFF;
+  --popover-foreground: var(--color-paper-900);
+  
+  --primary: var(--color-paper-900);
+  --primary-foreground: var(--color-paper-50);
+  
+  --secondary: var(--color-paper-100);
+  --secondary-foreground: var(--color-paper-900);
+  
+  --muted: var(--color-paper-100);
+  --muted-foreground: #66645D;
+  
+  --accent: var(--color-paper-200);
+  --accent-foreground: var(--color-paper-900);
+  
+  --destructive: oklch(0.577 0.245 27.325);
+  
+  --border: var(--color-paper-300);
+  --input: var(--color-paper-200);
+  --ring: var(--color-paper-300);
+}
+
+.dark {
+  /* Dark Mode (Ink) */
+  --background: var(--color-ink-900);
+  --foreground: var(--color-ink-50);
+  
+  --card: var(--color-ink-950);
+  --card-foreground: var(--color-ink-50);
+  
+  --popover: var(--color-ink-950);
+  --popover-foreground: var(--color-ink-50);
+  
+  --primary: var(--color-ink-50);
+  --primary-foreground: var(--color-ink-900);
+  
+  --secondary: var(--color-ink-800);
+  --secondary-foreground: var(--color-ink-50);
+  
+  --muted: var(--color-ink-800);
+  --muted-foreground: #888888;
+  
+  --accent: var(--color-ink-800);
+  --accent-foreground: var(--color-ink-50);
+  
+  --destructive: oklch(0.704 0.191 22.216);
+  
+  --border: var(--color-ink-800);
+  --input: var(--color-ink-800);
+  --ring: var(--color-ink-800);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-accent transition-colors duration-300;
+  }
+  
+  /* Helper classes */
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 1.5rem;
+  }
+  @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+  @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+  @media (min-width: 1280px) { .masonry-grid { column-count: 4; } }
+
+  .break-inside-avoid { break-inside: avoid; }
+}
