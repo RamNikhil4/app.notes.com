@@ -1,8 +1,8 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { CheckSquare, Image, Paintbrush, X } from "lucide-react";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Image, CheckSquare, Paintbrush, X, Save } from "lucide-react";
-import { NoteCard } from "../NoteCard";
 import { MasonryGrid } from "../MasonryGrid";
+import { NoteCard } from "../NoteCard";
 import { NoteEditor } from "../NoteEditor";
 import { Button } from "../ui/Button";
 
