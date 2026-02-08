@@ -1,4 +1,6 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Github } from "lucide-react";
 import { Button } from "../ui/Button";
@@ -80,7 +82,7 @@ export function LoginPage() {
 
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link
-            to="/"
+            href="/"
             className="hover:text-primary underline underline-offset-4"
           >
             Continue as Guest

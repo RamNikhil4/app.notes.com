@@ -1,4 +1,6 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import { NoteEditor } from "../NoteEditor";
@@ -19,7 +21,7 @@ export function NoteDetailsPage({ noteId }: NoteDetailsPageProps) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <Link to="/">
+        <Link href="/">
           <Button
             variant="ghost"
             className="gap-2 pl-2 text-muted-foreground hover:text-foreground"

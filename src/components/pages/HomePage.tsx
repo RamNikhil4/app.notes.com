@@ -1,3 +1,5 @@
+"use client";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckSquare, Image, Paintbrush, X } from "lucide-react";
 import { useState } from "react";

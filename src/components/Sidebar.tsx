@@ -1,6 +1,9 @@
-import { Link, useLocation } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { LayoutGrid, Plus, Settings, StickyNote } from "lucide-react";
+import { LayoutGrid, Plus, StickyNote } from "lucide-react";
 import { cn } from "../lib/utils";
 
 const links = [
@@ -9,7 +12,7 @@ const links = [
 ];
 
 export function Sidebar() {
-  const { pathname } = useLocation();
+  const pathname = usePathname();
 
   return (
     <motion.aside
@@ -33,7 +36,7 @@ export function Sidebar() {
             return (
               <Link
                 key={link.to}
-                to={link.to}
+                href={link.to}
                 className={cn(
                   "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 group relative",
                   isActive
