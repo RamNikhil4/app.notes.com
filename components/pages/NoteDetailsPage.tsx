@@ -11,7 +11,6 @@ interface NoteDetailsPageProps {
 }
 
 export function NoteDetailsPage({ noteId }: NoteDetailsPageProps) {
-  // Mock data lookup (in real app, use loader)
   const isDemo = noteId === "1";
   const initialTitle = isDemo ? "Project Ideas 2024" : `Note ${noteId}`;
   const initialContent = isDemo

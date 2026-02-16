@@ -1,11 +1,56 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Github } from "lucide-react";
 import { Button } from "../ui/Button";
+import { $fetch } from "../../lib/api-client";
 
-export function LoginPage() {
+export function SignupPage() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError("");
+  };
+
+  const handleSignup = async () => {
+    if (!formData.name || !formData.email || !formData.password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await $fetch.post("/auth/signup", {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (response.success) {
+        router.push("/");
+      } else {
+        setError(response.message || "Signup failed");
+      }
+    } catch (err: any) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <motion.div
@@ -14,30 +59,56 @@ export function LoginPage() {
         className="w-full max-w-sm space-y-6"
       >
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold tracking-tight">Welcome back</h1>
+          <h1 className="text-3xl font-bold tracking-tight">
+            Create an account
+          </h1>
           <p className="text-muted-foreground">
-            Enter your email to sign in to your account
+            Enter your details to create your account
           </p>
         </div>
 
         <div className="space-y-4">
           <div className="space-y-2">
             <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full rounded-lg border border-border bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            />
+          </div>
+          <div className="space-y-2">
+            <input
               type="email"
+              name="email"
               placeholder="name@example.com"
+              value={formData.email}
+              onChange={handleChange}
               className="w-full rounded-lg border border-border bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
             />
           </div>
           <div className="space-y-2">
             <input
               type="password"
+              name="password"
               placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
               className="w-full rounded-lg border border-border bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
             />
           </div>
-          <Button className="w-full" size="lg">
-            Sign In
-            <ArrowRight className="ml-2 w-4 h-4" />
+
+          {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+
+          <Button
+            className="w-full"
+            size="lg"
+            onClick={handleSignup}
+            disabled={loading}
+          >
+            {loading ? "Signing up..." : "Sign Up"}
+            {!loading && <ArrowRight className="ml-2 w-4 h-4" />}
           </Button>
 
           <div className="relative">
@@ -82,10 +153,10 @@ export function LoginPage() {
 
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link
-            href="/"
+            href="/login"
             className="hover:text-primary underline underline-offset-4"
           >
-            Continue as Guest
+            Already have an account? Sign in
           </Link>
         </p>
       </motion.div>
